@@ -5,6 +5,7 @@ import NewItem from "./NewItem";
 
 const NewReleases = () => {
   const [newAlbums, setNewAlbums] = useState(null);
+  console.log("rendering new-releases.js");
 
   useEffect(() => {
     const fetchData = async () => {

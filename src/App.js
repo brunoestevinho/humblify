@@ -9,11 +9,11 @@ import Routes from "./components/Routes";
 const App = () => {
   console.log("rendering app.js");
 
-  const [spotifyAuthToken, setSpotifyAuthToken] = useState("");
+  const [spotifyAuthToken, setSpotifyAuthToken] = useState();
 
   useEffect(() => {
     setSpotifyAuthToken(token);
-  }, []);
+  }, [spotifyAuthToken]);
 
   return <div>{spotifyAuthToken ? <Routes /> : <Login />}</div>;
 };

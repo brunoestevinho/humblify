@@ -24,7 +24,7 @@ const Login = () => {
             "playlist-read-private",
             "playlist-read-collaborative",
             "playlist-modify-public",
-          ]} // either style will work
+          ]}
         />
       </div>
     </div>
