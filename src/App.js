@@ -1,34 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { token } from "./apiCalls";
+import React, { Component } from "react";
+import Cookies from "js-cookie";
+import { Switch, Route } from "react-router-dom";
 
 import "./App.css";
 
 import Home from "./components/Home";
+import NewReleases from "./components/NewReleases";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 
-const App = () => {
-  const [accessToken, setAccessToken] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setAccessToken(token);
-    };
-    fetchData();
-  }, []);
-
-  return (
-    <div className="app-container">
-      {accessToken ? (
-        <div className="router">
-          <Navbar />
-          <Home />
-        </div>
-      ) : (
-        <Login />
-      )}
-    </div>
-  );
-};
+class App extends Component {
+  componentDidMount() {
+    console.log("App component mounted");
+  }
+  componentDidUpdate() {
+    console.log("App component updated");
+  }
+  render() {
+    return (
+      <div>
+        {Cookies.get("spotifyAuthToken") ? (
+          <div className="app-container">
+            <Navbar />
+            <Switch>
+              <Route path="/home">
+                <Home />
+              </Route>
+              <Route path="/recent">
+                <NewReleases />
+              </Route>
+            </Switch>
+          </div>
+        ) : (
+          <Login />
+        )}
+      </div>
+    );
+  }
+}
 
 export default App;

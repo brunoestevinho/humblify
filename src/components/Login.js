@@ -10,7 +10,7 @@ const Login = () => {
 
       <div className="loginBtn">
         <SpotifyAuth
-          redirectUri="http://localhost:3000/callback"
+          redirectUri="http://localhost:3000/home"
           clientID="6bd413ba51b941f99b32b4da3d082ffd"
           scopes={[
             "user-read-private",

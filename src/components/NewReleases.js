@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { catchErrors, getNewReleases } from "../apiCalls";
 import NewItem from "./NewItem";
 
-const Content = () => {
+const NewReleases = () => {
   const [newAlbums, setNewAlbums] = useState(null);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Content = () => {
       {newAlbums ? (
         <div className="home-content">
           <header>
-            <h1 className="text-4xl">Home</h1>
+            <h1 className="text-4xl">Recent Nav</h1>
           </header>
 
           <section className="home-section">
@@ -64,4 +64,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default NewReleases;
