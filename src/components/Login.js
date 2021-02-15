@@ -3,6 +3,8 @@ import React from "react";
 import { SpotifyAuth } from "react-spotify-auth";
 
 const Login = () => {
+  console.log("rendering login.js");
+
   return (
     <div className="login-page h-screen pt-36">
       <h1 className="text-5xl pb-2">Humblify</h1>

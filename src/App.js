@@ -1,42 +1,21 @@
-import React, { Component } from "react";
-import Cookies from "js-cookie";
-import { Switch, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { token } from "./apiCalls";
 
 import "./App.css";
 
-import Home from "./components/Home";
-import NewReleases from "./components/NewReleases";
-import Navbar from "./components/Navbar";
 import Login from "./components/Login";
+import Routes from "./components/Routes";
 
-class App extends Component {
-  componentDidMount() {
-    console.log("App component mounted");
-  }
-  componentDidUpdate() {
-    console.log("App component updated");
-  }
-  render() {
-    return (
-      <div>
-        {Cookies.get("spotifyAuthToken") ? (
-          <div className="app-container">
-            <Navbar />
-            <Switch>
-              <Route path="/home">
-                <Home />
-              </Route>
-              <Route path="/recent">
-                <NewReleases />
-              </Route>
-            </Switch>
-          </div>
-        ) : (
-          <Login />
-        )}
-      </div>
-    );
-  }
-}
+const App = () => {
+  console.log("rendering app.js");
+
+  const [spotifyAuthToken, setSpotifyAuthToken] = useState("");
+
+  useEffect(() => {
+    setSpotifyAuthToken(token);
+  }, []);
+
+  return <div>{spotifyAuthToken ? <Routes /> : <Login />}</div>;
+};
 
 export default App;
