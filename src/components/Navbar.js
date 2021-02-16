@@ -22,12 +22,20 @@ const Navbar = () => {
     <nav className="nav-container">
       <Link to="/home">
         <div className="profile">
-          <img
-            className="avatar"
-            src={user.data.images[0].url}
-            alt="User Avatar"
-          />
-          <div className="nav-profile">{user.data.display_name}</div>
+          {user ? (
+            <img
+              className="avatar"
+              src={user.data.images[0].url}
+              alt="User Avatar"
+            />
+          ) : (
+            <p>Loading...</p>
+          )}
+          {user ? (
+            <div className="nav-profile">{user.data.display_name}</div>
+          ) : (
+            <p>Loading...</p>
+          )}
         </div>
       </Link>
 
