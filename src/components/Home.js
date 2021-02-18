@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 
-import { catchErrors, getNewReleases } from "../apiCalls";
+import { catchErrors, getNewReleases } from "../utils/apiCalls";
 import NewItem from "./NewItem";
 
-const Content = () => {
+const NewReleases = () => {
   const [newAlbums, setNewAlbums] = useState(null);
-  console.log("rendering home.js");
+
   useEffect(() => {
     const fetchData = async () => {
       const newAlbums = await getNewReleases();
 
       setNewAlbums(newAlbums);
     };
+
     catchErrors(fetchData());
   }, []);
 
@@ -20,7 +21,7 @@ const Content = () => {
       {newAlbums ? (
         <div className="home-content">
           <header>
-            <h1 className="text-4xl">Home</h1>
+            <h1 className="text-4xl">Recent Albums and Singles</h1>
           </header>
 
           <section className="home-section">
@@ -33,6 +34,11 @@ const Content = () => {
                   newAlbums.data.albums.items
                     .filter((album) => album.album_type === "album")
                     .slice(0, 10)
+                    .sort((a, b) => {
+                      return (
+                        new Date(b.release_date) - new Date(a.release_date)
+                      );
+                    })
                     .map((album, i) => <NewItem track={album} key={i} />)
                 ) : (
                   <p>Loading...</p>
@@ -49,6 +55,11 @@ const Content = () => {
                   newAlbums.data.albums.items
                     .filter((album) => album.album_type === "single")
                     .slice(0, 10)
+                    .sort((a, b) => {
+                      return (
+                        new Date(b.release_date) - new Date(a.release_date)
+                      );
+                    })
                     .map((album, i) => <NewItem track={album} key={i} />)
                 ) : (
                   <p>Loading...</p>
@@ -64,4 +75,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default NewReleases;

@@ -3,16 +3,17 @@ import React from "react";
 import { SpotifyAuth } from "react-spotify-auth";
 
 const Login = () => {
-  console.log("rendering login.js");
-
   return (
     <div className="login-page h-screen pt-36">
       <h1 className="text-5xl pb-2">Humblify</h1>
       <h2 className="text-xl">A simple user-friendly Spotify</h2>
+      <small>
+        Running in <b>{process.env.NODE_ENV}</b> mode.
+      </small>
 
       <div className="loginBtn">
         <SpotifyAuth
-          redirectUri="http://localhost:3000/home"
+          redirectUri="http://localhost:3000/"
           clientID="6bd413ba51b941f99b32b4da3d082ffd"
           scopes={[
             "user-read-private",

@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
-import { logout, getUser, catchErrors } from "../apiCalls";
+import { logout, getUser, catchErrors } from "../utils/apiCalls";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
-  console.log("rendering navbar.js");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,12 +14,11 @@ const Navbar = () => {
       setUser(data);
     };
     catchErrors(fetchData());
-    console.log(user);
   }, []);
 
   return (
     <nav className="nav-container">
-      <Link to="/home">
+      <Link to="/profile">
         <div className="profile">
           {user ? (
             <img
@@ -41,18 +39,18 @@ const Navbar = () => {
 
       <ul className="nav-menu">
         <li className="nav-item">
-          <Link to="/recent">
-            <div>Recent from artists you follow</div>
+          <Link to="/">
+            <div>Recent Releases</div>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/foryou">
+            <div>Recent For You</div>
           </Link>
         </li>
         <li className="nav-item">
           <Link to="/recent">
-            <div>Your Albums</div>
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/recent">
-            <div>Your Artists</div>
+            <div>TBD</div>
           </Link>
         </li>
       </ul>
