@@ -21,10 +21,13 @@ export const getArtist = (artistId) =>
   });
 
 /* Get Users's Followed Artists */
-export const getFollowing = () =>
-  axios.get("https://api.spotify.com/v1/me/following?type=artist", {
-    headers: getHeaders(),
-  });
+export const getFollowing = (lastID) =>
+  axios.get(
+    `https://api.spotify.com/v1/me/following?type=artist&after=${lastID}&limit=50`,
+    {
+      headers: getHeaders(),
+    }
+  );
 
 /* Get an Artist's Albums */
 export const getAlbums = (artistId) =>

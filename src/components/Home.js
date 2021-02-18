@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { catchErrors, getNewReleases } from "../utils/apiCalls";
 import NewItem from "./NewItem";
+import Loading from "./Loading";
 
 const NewReleases = () => {
   const [newAlbums, setNewAlbums] = useState(null);
@@ -41,7 +42,7 @@ const NewReleases = () => {
                     })
                     .map((album, i) => <NewItem track={album} key={i} />)
                 ) : (
-                  <p>Loading...</p>
+                  <Loading />
                 )}
               </ul>
             </div>
@@ -62,7 +63,7 @@ const NewReleases = () => {
                     })
                     .map((album, i) => <NewItem track={album} key={i} />)
                 ) : (
-                  <p>Loading...</p>
+                  <Loading />
                 )}
               </ul>
             </div>

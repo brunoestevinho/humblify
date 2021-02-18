@@ -7,6 +7,7 @@ import {
   flattenObject,
 } from "../utils/apiCalls";
 import NewItem from "./NewItem";
+import Loading from "./Loading";
 
 const NewForUser = () => {
   const [artists, setArtists] = useState(null);
@@ -14,18 +15,29 @@ const NewForUser = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getFollowing();
+      var tempData = [];
+      var lastID = " ";
 
-      setArtists(data);
-      //console.log(data);
+      do {
+        var data = await getFollowing(lastID);
+        lastID = data.data.artists.cursors.after;
+        tempData.push(data.data.artists.items);
+      } while (data.data.artists.cursors.after !== null);
+
+      var flattenedData = flattenObject(tempData);
+
+      setArtists(flattenedData);
     };
+    console.log(artists);
+
     catchErrors(fetchData());
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      var tempAlbums = [];
+      var tempData = [];
       var today = new Date();
+
       //Date 30 days ago
       today = new Date(
         today.getFullYear() +
@@ -37,9 +49,10 @@ const NewForUser = () => {
       today.setDate(today.getDate() - 30);
 
       if (artists) {
-        for (var artist in artists.data.artists.items) {
-          var data = await getAlbums(artists.data.artists.items[artist].id);
-          tempAlbums.push(
+        for (var artist in artists) {
+          var data = await getAlbums(artists[artist].id);
+
+          tempData.push(
             data.data.items.filter(
               (album) => new Date(album.release_date) > today
             )
@@ -47,17 +60,40 @@ const NewForUser = () => {
         }
       }
       //filter empty objects from array
-      var filteredAlbums = tempAlbums.filter(
+      var filteredData = tempData.filter(
         (value) => Object.keys(value).length !== 0
       );
 
-      var flattened = flattenObject(filteredAlbums);
+      var flattenedData = flattenObject(filteredData);
 
-      setAlbums(flattened);
+      setAlbums(flattenedData);
     };
 
     catchErrors(fetchData());
   }, [artists]);
+
+  const filteredAlbums = albums
+    .filter((album) => album.album_type === "album")
+    //below filter appears to work??
+    .filter(
+      (album, index, self) =>
+        index ===
+        self.findIndex((t) => t.place === album.place && t.name === album.name)
+    )
+    .sort((a, b) => {
+      return new Date(b.release_date) - new Date(a.release_date);
+    });
+  const filteredSingles = albums
+    .filter((album) => album.album_type === "single")
+    //below filter appears to work??
+    .filter(
+      (album, index, self) =>
+        index ===
+        self.findIndex((t) => t.place === album.place && t.name === album.name)
+    )
+    .sort((a, b) => {
+      return new Date(b.release_date) - new Date(a.release_date);
+    });
 
   return (
     <React.Fragment>
@@ -72,26 +108,16 @@ const NewForUser = () => {
                 <h3 className="text-2xl pb-12">New Albums</h3>
               </div>
               <ul>
-                {albums ? (
-                  albums
-                    .filter((album) => album.album_type === "album")
-                    //below filter appears to work??
-                    .filter(
-                      (album, index, self) =>
-                        index ===
-                        self.findIndex(
-                          (t) =>
-                            t.place === album.place && t.name === album.name
-                        )
-                    )
-                    .sort((a, b) => {
-                      return (
-                        new Date(b.release_date) - new Date(a.release_date)
-                      );
-                    })
-                    .map((album, i) => <NewItem track={album} key={i} />)
+                {filteredAlbums ? (
+                  Object.keys(filteredAlbums).length !== 0 ? (
+                    filteredAlbums.map((album, i) => (
+                      <NewItem track={album} key={i} />
+                    ))
+                  ) : (
+                    <p>Nothing in the last 30 days 😢</p>
+                  )
                 ) : (
-                  <p>Loading...</p>
+                  <Loading />
                 )}
               </ul>
             </div>
@@ -100,33 +126,23 @@ const NewForUser = () => {
                 <h3 className="text-2xl pb-12">New Singles</h3>
               </div>
               <ul>
-                {albums ? (
-                  albums
-                    .filter((album) => album.album_type === "single")
-                    //below filter appears to work??
-                    .filter(
-                      (album, index, self) =>
-                        index ===
-                        self.findIndex(
-                          (t) =>
-                            t.place === album.place && t.name === album.name
-                        )
-                    )
-                    .sort((a, b) => {
-                      return (
-                        new Date(b.release_date) - new Date(a.release_date)
-                      );
-                    })
-                    .map((album, i) => <NewItem track={album} key={i} />)
+                {filteredSingles ? (
+                  Object.keys(filteredSingles).length !== 0 ? (
+                    filteredSingles.map((album, i) => (
+                      <NewItem track={album} key={i} />
+                    ))
+                  ) : (
+                    <p>Nothing in the last 30 days 😢</p>
+                  )
                 ) : (
-                  <p>Loading...</p>
+                  <Loading />
                 )}
               </ul>
             </div>
           </section>
         </div>
       ) : (
-        <p>Loading...</p>
+        <Loading />
       )}
     </React.Fragment>
   );

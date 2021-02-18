@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { logout, getUser, catchErrors } from "../utils/apiCalls";
+import Loading from "./Loading";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -27,12 +28,12 @@ const Navbar = () => {
               alt="User Avatar"
             />
           ) : (
-            <p>Loading...</p>
+            <Loading />
           )}
           {user ? (
             <div className="nav-profile">{user.data.display_name}</div>
           ) : (
-            <p>Loading...</p>
+            <Loading />
           )}
         </div>
       </Link>
