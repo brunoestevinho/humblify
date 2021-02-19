@@ -47,9 +47,21 @@ export const getAlbum = (albumId) =>
     headers: getHeaders(),
   });
 
-/* Get an Album */
-export const getAlbum = (albumId) =>
-  axios.get(`https://api.spotify.com/v1/albums/${albumId}`, {
+/* Check if albums saved */
+export const checkAlbum = (albumId) =>
+  axios.get(`https://api.spotify.com/v1/me/albums/contains?ids=${albumId}`, {
+    headers: getHeaders(),
+  });
+
+/* Save albums */
+export const saveAlbum = (albumId) => {
+  const url = `https://api.spotify.com/v1/me/albums?ids=${albumId}`;
+  return axios({ method: "put", url, headers: getHeaders() });
+};
+
+/* Remove albums saved */
+export const removeAlbum = (albumId) =>
+  axios.delete(`https://api.spotify.com/v1/me/albums?ids=${albumId}`, {
     headers: getHeaders(),
   });
 

@@ -4,11 +4,11 @@ import { convertMs } from "../utils/functions";
 const TrackItem = ({ track }) => (
   <React.Fragment>
     <tr key={track.track_number}>
-      <td rowspan="2" className="py-4">
+      <td rowSpan="2" className="py-4">
         {track.track_number}
       </td>
       <td className="pt-4">{track.name}</td>
-      <td rowspan="2" className="text-right py-4">
+      <td rowSpan="2" className="text-right py-4">
         {convertMs(track.duration_ms)}
       </td>
     </tr>

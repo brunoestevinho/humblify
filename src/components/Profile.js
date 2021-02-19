@@ -1,34 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-import { getNewReleases } from "../utils/functions";
-import Like from "./Like";
+import { getUser } from "../utils/functions";
+import Loading from "./Loading";
 
-const NewReleases = () => {
-  const [liked, setLike] = useState(false);
+const Profile = () => {
+  const [user, setUser] = useState(null);
 
-  function onLikeHandler() {
-    setLike(!liked);
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getUser();
+
+      setUser(data.data);
+    };
+    fetchData();
+  }, []);
 
   return (
     <React.Fragment>
-      <div className="home-content">
-        <header>
-          <h1 className="text-4xl">Hello User</h1>
-        </header>
+      {user ? (
+        <div className="home-content">
+          <header>
+            <h1 className="text-4xl pt-16">Hello {user.display_name}</h1>
+          </header>
 
-        <section className="home-section">
-          <div>
+          <section className="home-section">
             <div>
-              <h3 className="text-2xl pb-12">
-                <Like />
-              </h3>
+              <div>
+                <h3 className="text-lg pb-6">Your email: {user.email}</h3>
+                <h3 className="text-lg pb-6">
+                  Followers: {user.followers.total}
+                </h3>
+                <h3 className="text-lg pb-6">
+                  {user.product === "premium" ? (
+                    <span>You're a premium user</span>
+                  ) : (
+                    <span>You're not a premium user</span>
+                  )}
+                </h3>
+              </div>
             </div>
-          </div>
-        </section>
-      </div>
+            <div>
+              <a
+                href={user.external_urls.spotify}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="border-2 border-green-700 rounded-full p-2 text-center my-3 inline-block focus:outline-none">
+                  View on Spotify
+                </button>
+              </a>
+            </div>
+          </section>
+        </div>
+      ) : (
+        <Loading />
+      )}
     </React.Fragment>
   );
 };
 
-export default NewReleases;
+export default Profile;

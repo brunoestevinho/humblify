@@ -53,15 +53,15 @@ const Album = () => {
             </div>
           </div>
           <div>
-            <button className="border-2 border-green-700 rounded-full p-2 text-center ml-14 mr-2 mb-1 inline-block align-middle">
-              <a
-                href={album.data.external_urls.spotify}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+            <a
+              href={album.data.external_urls.spotify}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="border-2 border-green-700 rounded-full p-2 text-center ml-14 mr-2 mb-1 inline-block align-middle focus:outline-none">
                 Play on Spotify
-              </a>
-            </button>
+              </button>
+            </a>
             <Like />
 
             <div className="tracklist">
@@ -76,7 +76,7 @@ const Album = () => {
                 <tbody>
                   {album.data.tracks ? (
                     album.data.tracks.items.map((track, i) => (
-                      <TrackItem track={track} />
+                      <TrackItem track={track} key={i} />
                     ))
                   ) : (
                     <Loading />

@@ -49,6 +49,11 @@ const Navbar = () => {
             <div>Recent For You</div>
           </Link>
         </li>
+        <li className="nav-item">
+          <Link to="/youralbums">
+            <div>Your saved albums</div>
+          </Link>
+        </li>
       </ul>
       <div className="logout" onClick={logout}>
         Logout
