@@ -47,13 +47,11 @@ export const getAlbum = (albumId) =>
     headers: getHeaders(),
   });
 
-// Higher-order function for async/await error handling
-export const catchErrors = (fn) =>
-  function (...args) {
-    return fn(...args).catch((err) => {
-      console.error(err);
-    });
-  };
+/* Get an Album */
+export const getAlbum = (albumId) =>
+  axios.get(`https://api.spotify.com/v1/albums/${albumId}`, {
+    headers: getHeaders(),
+  });
 
 // Remove cookie to logout
 export const logout = () => {
@@ -71,6 +69,7 @@ export const flattenObject = (obj) => {
   );
 };
 
+//Convert ms to min:sec
 export const convertMs = (millis) => {
   var minutes = Math.floor(millis / 60000);
   var seconds = ((millis % 60000) / 1000).toFixed(0);

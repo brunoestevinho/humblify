@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { catchErrors, getAlbum } from "../utils/functions";
+import { getAlbum } from "../utils/functions";
 import Loading from "./Loading";
 import TrackItem from "./TrackItem";
+import Like from "./Like";
 
 const Album = () => {
   const { albumId } = useParams();
@@ -14,14 +15,13 @@ const Album = () => {
       const data = await getAlbum(albumId);
       setAlbum(data);
     };
-    console.log(album);
-    catchErrors(fetchData());
+    fetchData();
   }, [albumId]);
 
   return (
     <React.Fragment>
       {album ? (
-        <div>
+        <div className="album-container">
           <div className="album-content">
             <div className="artwork">
               {album.data.images.length && (
@@ -53,7 +53,7 @@ const Album = () => {
             </div>
           </div>
           <div>
-            <div className="border-2 border-green-700 rounded-full p-2 text-center w-36 ml-14">
+            <button className="border-2 border-green-700 rounded-full p-2 text-center ml-14 mr-2 mb-1 inline-block align-middle">
               <a
                 href={album.data.external_urls.spotify}
                 target="_blank"
@@ -61,7 +61,9 @@ const Album = () => {
               >
                 Play on Spotify
               </a>
-            </div>
+            </button>
+            <Like />
+
             <div className="tracklist">
               <table>
                 <thead className="border-b-2 border-gray-700">

@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import {
-  catchErrors,
-  getFollowing,
-  getAlbums,
-  flattenObject,
-} from "../utils/functions";
+import { getFollowing, getAlbums, flattenObject } from "../utils/functions";
 import NewItem from "./NewItem";
 import Loading from "./Loading";
 
@@ -28,9 +23,8 @@ const NewForUser = () => {
 
       setArtists(flattenedData);
     };
-    console.log(artists);
 
-    catchErrors(fetchData());
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -69,7 +63,7 @@ const NewForUser = () => {
       setAlbums(flattenedData);
     };
 
-    catchErrors(fetchData());
+    fetchData();
   }, [artists]);
 
   const filteredAlbums = albums

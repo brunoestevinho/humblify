@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
-import { logout, getUser, catchErrors } from "../utils/functions";
+import { logout, getUser } from "../utils/functions";
 import Loading from "./Loading";
 
 const Navbar = () => {
@@ -14,7 +14,7 @@ const Navbar = () => {
 
       setUser(data);
     };
-    catchErrors(fetchData());
+    fetchData();
   }, []);
 
   return (

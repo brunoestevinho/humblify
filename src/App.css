@@ -136,10 +136,19 @@ li {
   height: 20vh;
 }
 
+.album-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .album-content {
   width: 100%;
+  align-items: center;
   padding: 50px;
   display: flex;
+  max-width: 1200px;
 }
 
 .artwork {
@@ -153,6 +162,7 @@ li {
 
 .tracklist {
   width: 100%;
+  max-width: 1200px;
   padding: 50px;
 }
 

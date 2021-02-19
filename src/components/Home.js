@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { catchErrors, getNewReleases } from "../utils/functions";
+import { getNewReleases } from "../utils/functions";
 import NewItem from "./NewItem";
 import Loading from "./Loading";
 
@@ -14,7 +14,7 @@ const NewReleases = () => {
       setNewAlbums(newAlbums);
     };
 
-    catchErrors(fetchData());
+    fetchData();
   }, []);
 
   return (

@@ -1,38 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-import { catchErrors, getNewReleases } from "../utils/functions";
+import { getNewReleases } from "../utils/functions";
+import Like from "./Like";
 
 const NewReleases = () => {
-  const [newAlbums, setNewAlbums] = useState(null);
+  const [liked, setLike] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const newAlbums = await getNewReleases();
-
-      setNewAlbums(newAlbums);
-    };
-    catchErrors(fetchData());
-  }, []);
+  function onLikeHandler() {
+    setLike(!liked);
+  }
 
   return (
     <React.Fragment>
-      {newAlbums ? (
-        <div className="home-content">
-          <header>
-            <h1 className="text-4xl">Hello User</h1>
-          </header>
+      <div className="home-content">
+        <header>
+          <h1 className="text-4xl">Hello User</h1>
+        </header>
 
-          <section className="home-section">
+        <section className="home-section">
+          <div>
             <div>
-              <div>
-                <h3 className="text-2xl pb-12">Your Profile</h3>
-              </div>
+              <h3 className="text-2xl pb-12">
+                <Like />
+              </h3>
             </div>
-          </section>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+          </div>
+        </section>
+      </div>
     </React.Fragment>
   );
 };
