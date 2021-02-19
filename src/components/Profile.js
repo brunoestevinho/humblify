@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { catchErrors, getNewReleases } from "../utils/apiCalls";
+import { catchErrors, getNewReleases } from "../utils/functions";
 
 const NewReleases = () => {
   const [newAlbums, setNewAlbums] = useState(null);

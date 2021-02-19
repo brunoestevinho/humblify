@@ -1,28 +1,30 @@
 import React from "react";
 
-const NewItem = ({ track }) => (
+import { Link } from "react-router-dom";
+
+const NewItem = ({ data }) => (
   <li>
-    <div className="item">
+    <Link className="item" to={`/album/${data.id}`}>
       <div>
         <div>
-          {track.images.length && (
-            <img src={track.images[1].url} alt="Album Artwork" />
+          {data.images.length && (
+            <img src={data.images[1].url} alt="Album Artwork" />
           )}
         </div>
       </div>
       <div className="item-description">
         <span>
-          {track.name && (
+          {data.name && (
             <span>
-              <strong>{track.name}</strong>
+              <strong>{data.name}</strong>
             </span>
           )}
 
           <div>
-            {track.artists.map((artist, i) => (
+            {data.artists.map((artist, i) => (
               <span key={i}>
                 {artist.name}
-                {track.artists.length > 0 && i === track.artists.length - 1
+                {data.artists.length > 0 && i === data.artists.length - 1
                   ? ""
                   : ","}
                 &nbsp;
@@ -31,7 +33,7 @@ const NewItem = ({ track }) => (
           </div>
         </span>
       </div>
-    </div>
+    </Link>
   </li>
 );
 

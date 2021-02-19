@@ -41,6 +41,12 @@ export const getNewReleases = () =>
     headers: getHeaders(),
   });
 
+/* Get an Album */
+export const getAlbum = (albumId) =>
+  axios.get(`https://api.spotify.com/v1/albums/${albumId}`, {
+    headers: getHeaders(),
+  });
+
 // Higher-order function for async/await error handling
 export const catchErrors = (fn) =>
   function (...args) {
@@ -63,4 +69,10 @@ export const flattenObject = (obj) => {
     (acc, cur) => acc.concat(Array.isArray(cur) ? flattenObject(cur) : cur),
     []
   );
+};
+
+export const convertMs = (millis) => {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
 };

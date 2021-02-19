@@ -5,7 +5,7 @@ import {
   getFollowing,
   getAlbums,
   flattenObject,
-} from "../utils/apiCalls";
+} from "../utils/functions";
 import NewItem from "./NewItem";
 import Loading from "./Loading";
 
@@ -108,14 +108,10 @@ const NewForUser = () => {
                 <h3 className="text-2xl pb-12">New Albums</h3>
               </div>
               <ul>
-                {filteredAlbums ? (
-                  Object.keys(filteredAlbums).length !== 0 ? (
-                    filteredAlbums.map((album, i) => (
-                      <NewItem track={album} key={i} />
-                    ))
-                  ) : (
-                    <p>Nothing in the last 30 days 😢</p>
-                  )
+                {Object.keys(filteredAlbums).length !== 0 ? (
+                  filteredAlbums.map((album, i) => (
+                    <NewItem data={album} key={i} />
+                  ))
                 ) : (
                   <Loading />
                 )}
@@ -126,14 +122,10 @@ const NewForUser = () => {
                 <h3 className="text-2xl pb-12">New Singles</h3>
               </div>
               <ul>
-                {filteredSingles ? (
-                  Object.keys(filteredSingles).length !== 0 ? (
-                    filteredSingles.map((album, i) => (
-                      <NewItem track={album} key={i} />
-                    ))
-                  ) : (
-                    <p>Nothing in the last 30 days 😢</p>
-                  )
+                {Object.keys(filteredSingles).length !== 0 ? (
+                  filteredSingles.map((album, i) => (
+                    <NewItem data={album} key={i} />
+                  ))
                 ) : (
                   <Loading />
                 )}

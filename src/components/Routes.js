@@ -5,21 +5,17 @@ import Home from "./Home";
 import Navbar from "./Navbar";
 import Profile from "./Profile";
 import NewForUser from "./NewForUser";
+import Album from "./Album";
 
 const Routes = () => {
   return (
     <div className="app-container">
       <Navbar />
       <Switch>
-        <Route path="/" exact={true}>
-          <Home />
-        </Route>
-        <Route path="/foryou">
-          <NewForUser />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
+        <Route exact path="/" component={Home} />
+        <Route path="/foryou" component={NewForUser} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/album/:albumId" component={Album} />
       </Switch>
     </div>
   );

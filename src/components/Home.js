@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { catchErrors, getNewReleases } from "../utils/apiCalls";
+import { catchErrors, getNewReleases } from "../utils/functions";
 import NewItem from "./NewItem";
 import Loading from "./Loading";
 
@@ -40,7 +40,7 @@ const NewReleases = () => {
                         new Date(b.release_date) - new Date(a.release_date)
                       );
                     })
-                    .map((album, i) => <NewItem track={album} key={i} />)
+                    .map((album, i) => <NewItem data={album} key={i} />)
                 ) : (
                   <Loading />
                 )}
@@ -61,7 +61,7 @@ const NewReleases = () => {
                         new Date(b.release_date) - new Date(a.release_date)
                       );
                     })
-                    .map((album, i) => <NewItem track={album} key={i} />)
+                    .map((album, i) => <NewItem data={album} key={i} />)
                 ) : (
                   <Loading />
                 )}
@@ -70,7 +70,7 @@ const NewReleases = () => {
           </section>
         </div>
       ) : (
-        <p>Loading...</p>
+        <Loading />
       )}
     </React.Fragment>
   );

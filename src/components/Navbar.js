@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
-import { logout, getUser, catchErrors } from "../utils/apiCalls";
+import { logout, getUser, catchErrors } from "../utils/functions";
 import Loading from "./Loading";
 
 const Navbar = () => {
@@ -49,13 +49,7 @@ const Navbar = () => {
             <div>Recent For You</div>
           </Link>
         </li>
-        <li className="nav-item">
-          <Link to="/recent">
-            <div>TBD</div>
-          </Link>
-        </li>
       </ul>
-
       <div className="logout" onClick={logout}>
         Logout
       </div>
