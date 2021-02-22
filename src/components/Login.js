@@ -14,7 +14,7 @@ const Login = () => {
       <div className="loginBtn">
         <SpotifyAuth
           redirectUri="http://localhost:3000/"
-          clientID="6bd413ba51b941f99b32b4da3d082ffd"
+          clientID={process.env.REACT_APP_CLIENT_ID}
           scopes={[
             "user-read-private",
             "user-read-email",
