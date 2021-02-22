@@ -13,7 +13,7 @@ const Login = () => {
 
       <div className="loginBtn">
         <SpotifyAuth
-          redirectUri="http://localhost:3000/"
+          redirectUri="https://humblify.netlify.app/"
           clientID={process.env.REACT_APP_CLIENT_ID}
           scopes={[
             "user-read-private",
