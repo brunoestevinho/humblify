@@ -26,9 +26,9 @@ const Profile = () => {
           <section className="home-section">
             <div>
               <div>
-                <h3 className="text-lg pb-6">Your email: {user.email}</h3>
+                <h3 className="text-lg pb-6">Your email is {user.email}</h3>
                 <h3 className="text-lg pb-6">
-                  Followers: {user.followers.total}
+                  You currently have {user.followers.total} followers
                 </h3>
                 <h3 className="text-lg pb-6">
                   {user.product === "premium" ? (

@@ -47,6 +47,12 @@ export const getAlbum = (albumId) =>
     headers: getHeaders(),
   });
 
+/* Get Saved Albums */
+export const getSavedAlbums = () =>
+  axios.get(`https://api.spotify.com/v1/me/albums`, {
+    headers: getHeaders(),
+  });
+
 /* Check if albums saved */
 export const checkAlbum = (albumId) =>
   axios.get(`https://api.spotify.com/v1/me/albums/contains?ids=${albumId}`, {

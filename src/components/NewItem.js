@@ -10,6 +10,7 @@ const NewItem = ({ data }) => (
           {data.images.length && (
             <img src={data.images[1].url} alt="Album Artwork" />
           )}
+          <div className="overlay">...</div>
         </div>
       </div>
       <div className="item-description">

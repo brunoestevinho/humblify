@@ -6,6 +6,7 @@ import Navbar from "./Navbar";
 import Profile from "./Profile";
 import NewForUser from "./NewForUser";
 import Album from "./Album";
+import SavedAlbums from "./SavedAlbums";
 
 const Routes = () => {
   return (
@@ -15,6 +16,7 @@ const Routes = () => {
         <Route exact path="/" component={Home} />
         <Route path="/foryou" component={NewForUser} />
         <Route path="/profile" component={Profile} />
+        <Route path="/saved" component={SavedAlbums} />
         <Route path="/album/:albumId" component={Album} />
       </Switch>
     </div>

@@ -77,6 +77,7 @@ const NewForUser = () => {
     .sort((a, b) => {
       return new Date(b.release_date) - new Date(a.release_date);
     });
+
   const filteredSingles = albums
     .filter((album) => album.album_type === "single")
     //below filter appears to work??

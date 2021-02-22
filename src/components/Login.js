@@ -24,9 +24,6 @@ const Login = () => {
             "user-follow-modify",
             "user-library-read",
             "user-library-modify",
-            "playlist-read-private",
-            "playlist-read-collaborative",
-            "playlist-modify-public",
           ]}
         />
       </div>

@@ -50,7 +50,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/youralbums">
+          <Link to="/saved">
             <div>Your saved albums</div>
           </Link>
         </li>
