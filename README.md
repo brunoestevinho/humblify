@@ -2,7 +2,7 @@
 
 A simple way to access your Spotify data with focus on new releases.
 
-![Humblify](https://imgur.com/a/iaqZwAZ)
+![Humblify](https://imgur.com/BzLEqu5.png)
 
 ## Installing
 
